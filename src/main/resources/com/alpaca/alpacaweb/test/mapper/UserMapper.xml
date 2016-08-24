@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alpaca.alpacaweb.test.mapper.UserMapper">
+  <resultMap id="userResultMap" type="com.alpaca.alpacaweb.test.model.User" >
+    <result column="ID" property="id" />
+    <result column="USER_NAME" property="userName" />
+    <result column="PASSWORD" property="password" />
+    <result column="AGE" property="age" />
+  </resultMap>
+  
+  <!-- 查询字段 -->
+  <sql id="selectAll" >
+    SELECT ID,USER_NAME,PASSWORD,AGE
+    FROM USER_T
+  </sql>
+  
+  <select id="getUserById" resultMap="userResultMap">
+      <include refid="selectAll"/>
+      WHERE ID = #{userId}
+  </select>
+</mapper>
